@@ -1,4 +1,4 @@
-# E-commerce API
+# E-commerce API (RESTful API )
 
 This is an e-commerce API built using Node.js, Express, and MongoDB. The API allows users to perform CRUD operations on products, manage orders, and handle user authentication. It also provides full Swagger documentation to make testing and understanding the API easier.
 
