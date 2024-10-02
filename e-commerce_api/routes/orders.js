@@ -34,8 +34,14 @@ router.post('/', async (req, res) => {
 
 // GET /orders - Retrieve all orders
 router.get('/', async (req, res) => {
+    //current page (implementing for pagination)
+    const page = req.query.page || 1;
+    //number of orders per page
+    const ordersPerPage = 1;
     try {
         const orders = await Order.find()
+            .limit(ordersPerPage)
+            .skip((page - 1) * ordersPerPage)
             .populate('user products.product'); // Populate user and product details
         res.status(200).json(orders);
     } catch (err) {
