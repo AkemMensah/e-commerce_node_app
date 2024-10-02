@@ -39,6 +39,25 @@ router.get('/:id', async (req, res) => {
     }
 });
 
+// GET /products/category - Retrieve products by category
+router.get('/category/:category', async (req, res) => {
+    const category = req.params.category;
+    
+    try {
+        const products = await Product.find({ category });
+        
+        // Check if products are found
+        if (products.length === 0) {
+            return res.status(404).json({ message: `No products found for category: ${category}` });
+        }
+
+        res.status(200).json(products);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+
+
 // POST /products - Create a new product
 router.post('/', async (req, res) => {
     // Create a new product
