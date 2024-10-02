@@ -29,14 +29,24 @@ app.use('/orders', ordersRoute);
 // Swagger setup for API documentation
 const swaggerOptions = {
     swaggerDefinition: {
+        openapi: '3.0.0',
         info: {
-            title: 'E-commerce API',
+            title: 'E-Commerce API',
             version: '1.0.0',
-            description: 'E-commerce API Information',
+            description: 'E-Commerce API Documentation',
+            contact: {
+                name: 'Developer',
+            },
+            servers: [
+                {
+                    url: 'http://localhost:3000',
+                },
+            ],
         },
     },
-    apis: ['./routes/*.js'],
+    apis: ['./routes/*.js'], // Path to the API docs
 };
+
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
