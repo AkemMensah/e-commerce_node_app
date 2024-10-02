@@ -83,6 +83,7 @@ http://localhost:3000/api-docs
 - `PUT /orders/{id}`: Update an order
 - `DELETE /orders/{id}`: Delete an order
 - `GET /users/{id}/orders`: Get all orders for a specific user
+- `GET /users/:id/orders`: Get orders for a specific user
 
 NB: You may test the APIs (end points) using Postman.
 
