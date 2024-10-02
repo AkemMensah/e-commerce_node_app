@@ -21,7 +21,7 @@ router.get('/', async (req, res) => {
     }
 });
 
-// GET /products/:id - Retrieve a single product by ID
+// GET /products/:id - Retrieve a specific product by ID
 router.get('/:id', async (req, res) => {
     // Check if the ID is valid
     if (!ObjectId.isValid(req.params.id)){
