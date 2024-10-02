@@ -11,7 +11,7 @@ const app = express();
 app.use(express.json());
 
 // Connect to MongoDB
-mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(process.env.DATABASE_URL);
 const db = mongoose.connection;
 db.on('error', (error) => console.error(error));
 db.once('open', () => console.log('Connected to Database'));
@@ -20,6 +20,83 @@ db.once('open', () => console.log('Connected to Database'));
 const usersRoute = require('./routes/users');
 const productsRoute = require('./routes/products');
 const ordersRoute = require('./routes/orders');
+
+
+// Root route that returns HTML
+app.get('/', (req, res) => {
+    res.send(`
+        <html>
+            <head>
+                <title>E-Commerce API</title>
+                <style>
+                    .first {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    }
+                    .second {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    }
+                    footer {
+                    display: flex;
+                    flex-direction: space-between;
+                    justify-content: center;
+                    align-items: center;
+                    }
+                    .details {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    }
+                </style>
+            </head>
+            <body>
+                <div class="first">
+                <h1>Welcome to the E-Commerce API</h1>
+                <h2>Where would you like to go?</h2>
+                <p>Below are some general routes you can explore!</p>
+                <ul>
+                    <li><a href="/users" target="_blank" >Users</a> - Get all users</li>
+                    <li><a href="/products" target="_blank">Products</a> - Get all products</li>
+                    <li><a href="/orders" target="_blank">Orders</a> - Get all orders by users</li>
+                </ul>
+                <p>For Specific routes you may explore the following in the browser or use third party apps:</p>
+                </div>
+                <div class="second">
+                <ul>
+                    <h3>Products Routes</h3>
+                    <li>GET /products/{id}: Get a specific product</li>
+                    <li>GET /products/category/{category}: Get products by category</li>
+                    <li>Post /products/{id} Get a specific product</li>
+                    <li>PUT /products/{id}: Update a product</li>
+                    <li>DELETE /products/{id}: Delete a product</li>
+                </ul>
+                    <ul>
+                    <h3>Users Routes</h3>
+                    <li>GET /users: Get all users</li>
+                    <li>GET /users/{id}: Get a specific user by ID</li>
+                    <li>POST /users: Create a new user</li>
+                </ul>
+                <ul>
+                    <h3>Orders Routes</h3>
+                    <li>GET /orders: Get all orders</li>
+                    <li>POST /orders: Create a new order</li>
+                    <li>GET /users/{id}/orders: Get orders for a specific user</li>
+                </ul>
+                </div>
+                <p class="details">For more detailed information, check out the <a href="/api-docs" target="blank"> API Documentation</a></p>
+                <hr>
+                <footer>                    
+                    <p>Copyright (c) [2024] [Akem Mensah]</p>
+                </footer>
+            </body>
+
+        </html>
+    `);
+});
 
 // Set up routes
 app.use('/users', usersRoute);
