@@ -128,6 +128,7 @@ router.get('/', async (req, res) => {
     const ordersPerPage = 1;
     try {
         const orders = await Order.find()
+            .sort({createdAt:1})
             .limit(ordersPerPage)
             .skip((page - 1) * ordersPerPage)
             .populate('user products.product'); // Populate user and product details
