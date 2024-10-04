@@ -45,13 +45,17 @@ app.get('/', (req, res) => {
                     justify-content: center;
                     align-items: center;
                     }
+                    h3 {
+                    margin-top: 0;
+                    margin-bottom: 0;
+                    }
                     footer {
                     display: flex;
                     flex-direction: space-between;
                     justify-content: center;
                     align-items: center;
                     }
-                    .details {
+                    .note {
                     display: flex;
                     justify-content: center;
                     align-items: center;
@@ -93,7 +97,8 @@ app.get('/', (req, res) => {
                     <li>GET /users/{id}/orders: Get orders for a specific user</li>
                 </ul>
                 </div>
-                <p class="details">For more detailed information, check out the <a href="/api-docs" target="blank"> API Documentation</a></p>
+                <p class="note"><b>NB</b>:There is Pagination implemented for <em> GET: /products</em>, <em>GET /users</em>, and <em>GET /orders</em> routes. To get the next page use eg. <em>/products?page=2</em> and so on.</p>
+                <p class="note">For more detailed information, check out the <a href="/api-docs" target="blank"> API Documentation</a></p>
                 <hr>
                 <footer>                    
                     <p>Copyright (c) [2024] [Akem Mensah]</p>
