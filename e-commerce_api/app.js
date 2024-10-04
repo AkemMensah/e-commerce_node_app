@@ -9,10 +9,11 @@ const cors = require('cors');
 dotenv.config();
 
 // Use CORS to allow cross-origin requests
-app.use(cors());
 
 const app = express();
 app.use(express.json());
+app.use(cors()); // Enable CORS
+
 
 // Connect to MongoDB
 mongoose.connect(process.env.DATABASE_URL);
@@ -59,8 +60,9 @@ app.get('/', (req, res) => {
             </head>
             <body>
                 <div class="first">
-                <h1>Welcome to the E-Commerce API</h1>
-                <h2>Where would you like to go?</h2>
+                <h1 style="margin-bottom:0;">Welcome to the E-Commerce API</h1>
+                <p style="margin-top:0;color: red;">(Best viewed on desktop!)</p>
+                <h2 style="margin-top:0;margin-bottom:0">Where would you like to go?</h2>
                 <p>Below are some general routes you can explore!</p>
                 <ul>
                     <li><a href="/users" target="_blank" >Users</a> - Get all users</li>
@@ -72,9 +74,9 @@ app.get('/', (req, res) => {
                 <div class="second">
                 <ul>
                     <h3>Products Routes</h3>
-                    <li>GET /products/{id}: Get a specific product</li>
+                    <li>GET /products/{id}: Get a specific product by ID</li>
                     <li>GET /products/category/{category}: Get products by category</li>
-                    <li>Post /products/{id} Get a specific product</li>
+                    <li>Post /products/{id}: Create new product</li>
                     <li>PUT /products/{id}: Update a product</li>
                     <li>DELETE /products/{id}: Delete a product</li>
                 </ul>
