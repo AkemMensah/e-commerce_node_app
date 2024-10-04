@@ -130,14 +130,14 @@ const swaggerOptions = {
             },
             servers: [
                 {
-                    url: 'http://localhost:3000',
+                    url: process.env.NODE_ENV === 'production' 
+            ? 'https://e-commerce-node-33051b98p-akemmensahs-projects.vercel.app'  //Vercel deployment URL (production)
+            : 'http://localhost:3000', // Localhost (development)
                 },
             ],
         },
     },
-    // apis: ['./routes/*.js'],
-    apis: [__dirname + '/routes/*.js'],
-     // Path to the API docs
+    apis: ['./routes/*.js'], // Path to the API docs
 };
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
