@@ -135,7 +135,9 @@ const swaggerOptions = {
             ],
         },
     },
-    apis: ['./routes/*.js'], // Path to the API docs
+    // apis: ['./routes/*.js'],
+    apis: [__dirname + '/routes/*.js'],
+     // Path to the API docs
 };
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
