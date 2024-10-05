@@ -131,7 +131,7 @@ const swaggerOptions = {
             servers: [
                 {
                     url: process.env.NODE_ENV === 'production' 
-            ? 'https://e-commerce-node-33051b98p-akemmensahs-projects.vercel.app'  //Vercel deployment URL (production)
+            ? 'https://e-commerce-node-amgvhqs6z-akemmensahs-projects.vercel.app'  //Vercel deployment URL (production)
             : 'http://localhost:3000', // Localhost (development)
                 },
             ],
