@@ -25,6 +25,7 @@ db.once('open', () => console.log('Connected to Database'));
 const usersRoute = require('./routes/users');
 const productsRoute = require('./routes/products');
 const ordersRoute = require('./routes/orders');
+const authRoutes = require('./routes/auth');
 
 
 // Root route that returns HTML
@@ -112,10 +113,11 @@ app.get('/', (req, res) => {
     `);
 });
 
-// Set up routes
+// Setting up routes
 app.use('/users', usersRoute);
 app.use('/products', productsRoute);
 app.use('/orders', ordersRoute);
+app.use('/api/auth', authRoutes);
 
 // Swagger setup for API documentation
 const swaggerOptions = {
