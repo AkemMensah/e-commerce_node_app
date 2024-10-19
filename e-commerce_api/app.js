@@ -67,6 +67,7 @@ app.get('/', (req, res) => {
                 </style>
             </head>
             <body>
+                <section class="endPoints">
                 <div class="first">
                 <h1 style="margin-bottom:0;">Welcome to the E-Commerce API</h1>
                 <p style="margin-top:0;color: red;">(Best viewed on desktop!)</p>
@@ -101,6 +102,20 @@ app.get('/', (req, res) => {
                     <li>GET /users/{id}/orders: Get orders for a specific user</li>
                 </ul>
                 </div>
+                <hr>
+                </section>
+                <section class="auth" style="font-size:18px;display:flex;flex-direction:column;justity-content:center;margin:10px 0 ">
+                <p style="text-align:center">For Authentication and Role-Based Authorization, you may explore the following routes:</p>
+                <ul style="display:flex;flex-direction:column;align-items:center">
+                    <li>POST /api/auth/register: Register a new user</li>
+                    <li>POST /api/auth/login: Login a user - receive jwt token</li>
+                    <li>GET /api/auth/profile: Get user profile</li>
+                    <li>PUT /api/auth/profile: Update user profile</li>
+                    <li>GET /api/public-data - Get Public Data</li>
+                    <li>POST /api/assign-role - Assign Role to a User (Admin Only)</li>
+                    <li>DELETE /user/:id - Delete a User by ID (Admin Only)</li>
+                </ul>
+                </section>
                 <p class="note"><b>NB</b>:There is Pagination implemented for <em> GET: /products</em>, <em>GET /users</em>, and <em>GET /orders</em> routes. To get the next page use eg. <em>/products?page=2</em> and so on.</p>
                 <p class="note">For more detailed information, check out the <a href="/api-docs" target="blank"> API Documentation</a></p>
                 <hr>
