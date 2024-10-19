@@ -8,6 +8,60 @@ const authorizeRoles = require('../middleware/role');
 
 const router = express.Router();
 
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     User:
+ *       type: object
+ *       required:
+ *         - name
+ *         - email
+ *         - password
+ *       properties:
+ *         name:
+ *           type: string
+ *           description: The user's name
+ *         email:
+ *           type: string
+ *           description: The user's email
+ *         password:
+ *           type: string
+ *           description: The user's password
+ *     LoginRequest:
+ *       type: object
+ *       required:
+ *         - email
+ *         - password
+ *       properties:
+ *         email:
+ *           type: string
+ *           description: The user's email
+ *         password:
+ *           type: string
+ *           description: The user's password
+ */
+
+/**
+ * @swagger
+ * /register:
+ *   post:
+ *     summary: Register a new user
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/User'
+ *     responses:
+ *       201:
+ *         description: User registered successfully
+ *       400:
+ *         description: User already exists or validation errors
+ */
+
 // POST /register - Register a new user
 router.post('/register', [
     // Validate user input
@@ -37,6 +91,25 @@ router.post('/register', [
     }
 });
 
+/**
+ * @swagger
+ * /login:
+ *   post:
+ *     summary: Login a user
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/LoginRequest'
+ *     responses:
+ *       200:
+ *         description: JWT Token
+ *       400:
+ *         description: Invalid credentials
+ */
+
 // POST /login - Login a user
 router.post('/login', async (req, res) => {
     // Extract user input data from request body
@@ -58,6 +131,31 @@ router.post('/login', async (req, res) => {
         res.status(500).json({ message: err.message });
     }
 });
+
+/**
+ * @swagger
+ * /profile:
+ *   put:
+ *     summary: Update user profile
+ *     tags: [Auth]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             properties:
+ *               name:
+ *                 type: string
+ *               email:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Profile updated successfully
+ *       404:
+ *         description: User not found
+ */
 
 // PUT /profile (Authenticated users)
 router.put('/profile', verifyToken, async (req, res) => {
@@ -81,10 +179,36 @@ router.put('/profile', verifyToken, async (req, res) => {
     }
 });
 
+/**
+ * @swagger
+ * /public-data:
+ *   get:
+ *     summary: Get public data accessible to all users
+ *     tags: [Auth]
+ *     responses:
+ *       200:
+ *         description: Returns a public message
+ */
+
 // GET /public-data - (Accessible to all users including guests)
 router.get('/public-data', (req, res) => {
     res.json({ message: 'This is public data accessible to all users' });
 });
+
+/**
+ * @swagger
+ * /profile:
+ *   get:
+ *     summary: Get user profile
+ *     tags: [Auth]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Returns user profile
+ *       404:
+ *         description: User not found
+ */
 
 // GET /profile - Protected route: (accessible only to authenticated users)
 router.get('/profile', verifyToken, async (req, res) => {
@@ -96,6 +220,31 @@ router.get('/profile', verifyToken, async (req, res) => {
         res.status(500).json({ message: err.message });
     }
 });
+
+/**
+ * @swagger
+ * /assign-role:
+ *   post:
+ *     summary: Assign role to a user (Admin only)
+ *     tags: [Admin]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             properties:
+ *               userId:
+ *                 type: string
+ *               role:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Role assigned successfully
+ *       404:
+ *         description: User not found
+ */
 
 // POST /   asisign-role - Admin-only route: Assign role to a user
 router.post('/assign-role', verifyToken, authorizeRoles('Admin'), async (req, res) => {
@@ -116,6 +265,28 @@ router.post('/assign-role', verifyToken, authorizeRoles('Admin'), async (req, re
         res.status(500).json({ message: err.message });
     }
 });
+
+/**
+ * @swagger
+ * /user/{id}:
+ *   delete:
+ *     summary: Delete a user by ID (Admin only)
+ *     tags: [Admin]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: The ID of the user to delete
+ *     responses:
+ *       200:
+ *         description: User deleted successfully
+ *       404:
+ *         description: User not found
+ */
 
 // DELETE /user/:id - Admin-only route: Delete a user by ID
 router.delete('/user/:id', verifyToken, authorizeRoles('Admin'), async (req, res) => {
