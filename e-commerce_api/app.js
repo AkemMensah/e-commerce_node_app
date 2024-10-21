@@ -146,10 +146,15 @@ const swaggerOptions = {
                 name: 'Developer',
             },
             servers: [
+                // {
+                    // url: process.env.NODE_ENV === 'production' 
+            // ? 'https://e-commerce-node-app.vercel.app/'  //Vercel deployment URL (production)
+            // : 'http://localhost:3000', // Localhost (development)
+                // },
                 {
-                    url: process.env.NODE_ENV === 'production' 
-            ? 'https://e-commerce-node-app.vercel.app/'  //Vercel deployment URL (production)
-            : 'http://localhost:3000', // Localhost (development)
+                    url: process.env.VERCEL_URL 
+                        ? `https://${process.env.VERCEL_URL}`  // Automatically detect the Vercel deployment URL
+                        : 'http://localhost:3000', // Localhost (development)
                 },
             ],
         },
