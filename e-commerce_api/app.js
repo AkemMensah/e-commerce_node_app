@@ -117,7 +117,7 @@ app.get('/', (req, res) => {
                 </ul>
                 </section>
                 <p class="note"><b>NB</b>:There is Pagination implemented for <em> GET: /products</em>, <em>GET /users</em>, and <em>GET /orders</em> routes. To get the next page use eg. <em>/products?page=2</em> and so on.</p>
-                <p class="note">For more detailed information, check out the <a href="/api-docs" target="blank"> API Documentation</a></p>
+                <p class="note">For more detailed information, check out the <a href="/docs" target="blank"> API Documentation</a></p>
                 <hr>
                 <footer>                    
                     <p>Copyright (c) [2024] [Akem Mensah]</p>
