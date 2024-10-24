@@ -7,6 +7,7 @@ This is an e-commerce API built using Node.js, Express, and MongoDB. The API all
 - **User Management**: Create, view, and manage users.
 - **Product Management**: Add, view, update, and delete products.
 - **Order Management**: Place, view, and track orders.
+- **Authentication and Authorization**: Register,login,view, delete,assign-role etc.
 - **Swagger Documentation**: Auto-generated API documentation using Swagger.
 
 ## Technologies Used
