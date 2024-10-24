@@ -162,6 +162,10 @@ const swaggerOptions = {
     apis: ['./routes/*.js'], // Path to the API docs
 };
 
+// "rewrites": [
+//     { "source": "/docs/(.*)", "destination": "/docs/$1" }
+//   ]
+
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
