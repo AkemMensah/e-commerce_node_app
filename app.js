@@ -167,7 +167,14 @@ const swaggerOptions = {
 //   ]
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
-app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+// app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+
+// Serve Swagger with no-cache headers
+app.use('/docs', (req, res, next) => {
+    res.set('Cache-Control', 'no-store');
+    next();
+}, swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+
 
 // Start the server
 const PORT = process.env.PORT || 3000;
