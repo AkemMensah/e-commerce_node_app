@@ -162,10 +162,6 @@ const swaggerOptions = {
     apis: ['./routes/*.js'], // Path to the API docs
 };
 
-// "rewrites": [
-//     { "source": "/docs/(.*)", "destination": "/docs/$1" }
-//   ]
-
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 // app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
@@ -174,7 +170,6 @@ app.use('/docs', (req, res, next) => {
     res.set('Cache-Control', 'no-store');
     next();
 }, swaggerUi.serve, swaggerUi.setup(swaggerDocs));
-
 
 // Start the server
 const PORT = process.env.PORT || 3000;
