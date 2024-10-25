@@ -4,6 +4,7 @@ const dotenv = require('dotenv');
 const swaggerUi = require('swagger-ui-express'); // Swagger UI
 const swaggerJsDoc = require('swagger-jsdoc'); // Swagger JS Doc
 const cors = require('cors');
+const path = require('path');
 
 // Load environment variables
 dotenv.config();
@@ -162,13 +163,17 @@ const swaggerOptions = {
 };
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
-// app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 // Serve Swagger with no-cache headers
-app.use('/docs', (req, res, next) => {
-    res.set('Cache-Control', 'no-store');
-    next();
-}, swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+// app.use('/docs', (req, res, next) => {
+//     res.set('Cache-Control', 'no-store');
+//     next();
+// }, swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+
+// Static files for Swagger UI
+app.use('/api-docs', express.static(path.join(__dirname, 'node_modules', 'swagger-ui-dist')));
+
 
 // Start the server
 const PORT = process.env.PORT || 3000;
